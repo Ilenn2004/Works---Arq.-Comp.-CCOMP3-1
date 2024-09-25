@@ -104,9 +104,9 @@ union Float32Bits {
 
 int main() {
     Float32Bits valor1, valor2;
-    cout << "Ingresa un valor en formato float: ";
+    cout << "Float 1: ";
     cin >> valor1.valorFlotante;
-    cout << "Ingresa otro valor en formato float: ";
+    cout << "Float 2: ";
     cin >> valor2.valorFlotante;
 
     bitset<1> signo1(valor1.partes.signo);
@@ -117,15 +117,13 @@ int main() {
     bitset<8> exponente2(valor2.partes.exponente);
     bitset<23> significando2(valor2.partes.significando);
 
-    cout << "Valor 1:\n";
-    cout << "Exponente: " << exponente1 << "\nSigno: " << signo1 << "\nSignificando: " << significando1 << endl;
-    cout << "Valor 2:\n";
-    cout << "Exponente: " << exponente2 << "\nSigno: " << signo2 << "\nSignificando: " << significando2 << endl;
+    cout << "\nFloat 1: -> Exponente: " << exponente1 << " - Signo: " << signo1 << " - Significando: " << significando1 << " <-" << endl;
+    cout << "Float 2: -> Exponente: " << exponente2 << " - Signo: " << signo2 << " - Significando: " << significando2 << " <-\n" <<endl;
 
     //Si alguno de los valores es 0
     if ((exponente1.none() && significando1.none()) || (exponente2.none() && significando2.none())) {
-        cout << "El resultado es: \"0\"\n";
-        cout << "En bits es: " << bitset<1>(0) << " " << bitset<8>(0) << " " << bitset<23>(0);
+        cout << "Resultado final - binario: " << bitset<1>(0) << " " << bitset<8>(0) << " " << bitset<23>(0);
+		cout << "\nResultado final - float: \"0\"\n";
         return 0;
     }
 
@@ -158,7 +156,7 @@ int main() {
     bitset<1> signoFinal = signo1 ^ signo2;
 
     //Mostrar el resultado en binario
-    cout << "Resultado Producto: " << signoFinal << " " << exponenteFinal << " " << significandoFinal << endl;
+    cout << "Resultado final - binario: " << signoFinal << " " << exponenteFinal << " " << significandoFinal << endl;
 
     //Usando la unión Float32Bits
     Float32Bits resultado;
@@ -166,7 +164,7 @@ int main() {
     resultado.partes.exponente = exponenteFinal.to_ulong();
     resultado.partes.significando = significandoFinal.to_ulong();
 
-    cout << "El valor flotante del resultado es: " << resultado.valorFlotante << endl;
+    cout << "Resultado final - float: " << resultado.valorFlotante << endl;
 
     return 0;
 }
