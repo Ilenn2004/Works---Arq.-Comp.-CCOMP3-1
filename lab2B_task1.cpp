@@ -131,10 +131,10 @@ int main() {
 
     //Verificar overflow y underflow en el exponente
     if ((exponente1[7] == 0 && exponente2[7] == 0) && exponenteSuma[7] == 1) {
-        cout << "Underflow de exponente.\n";
+        cout << "Float 1 - Underflow de exponente.\n";
         return 0;
     } else if ((exponente1[7] == 1 && exponente2[7] == 1) && exponenteSuma[7] == 0) {
-        cout << "Overflow de exponente.\n";
+        cout << "Float 1 - Overflow de exponente.\n";
         return 0;
     }
 
@@ -145,12 +145,20 @@ int main() {
 
     //Verificar overflow/underflow en el exponente final
     if ((exponenteNormalizado[7] == 0 && exponenteSuma[7] == 0) && exponenteFinal[7] == 1) {
-        cout << "2 Underflow de exponente.\n";
+        cout << "Float 2 - Underflow de exponente.\n";
         return 0;
     } else if ((exponenteNormalizado[7] == 1 && exponenteSuma[7] == 1) && exponenteFinal[7] == 0) {
-        cout << "2 Overflow de exponente.\n";
+        cout << "Float 2 - Overflow de exponente.\n";
         return 0;
     }
+	
+	//Verificar overflow/underflow en la representacion
+	if (exponenteFinal.to_ulong() < 1) {
+    cout << "Underflow de exponente (fuera del rango representable de 8 bits).\n";
+	}
+	else if (exponenteFinal.to_ulong() > 255) {
+    cout << "Overflow de exponente (fuera del rango representable de 8 bits).\n";
+	}
 
     //Determinar el signo final
     bitset<1> signoFinal = signo1 ^ signo2;
